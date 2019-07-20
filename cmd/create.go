@@ -67,7 +67,12 @@ var createCmd = &cobra.Command{
 		name = strings.ReplaceAll(name, "-", "_")
 
 		log.Println("Creating dirtory ...")
-		os.Mkdir("./algorithm/"+name, os.ModePerm)
+		if _, err := os.Stat(path.Join("./algorithm", name)); !os.IsNotExist(err) {
+			log.Println("Question alreay exists!")
+			os.Exit(1)
+		}
+
+		os.Mkdir(path.Join("./algorithm", name), os.ModePerm)
 
 		slnT, err := template.New("solution").Parse(slnTpl)
 		if err != nil {
