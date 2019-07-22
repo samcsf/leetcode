@@ -13,7 +13,17 @@ type TestCase struct {
 
 func TestSolution(t *testing.T) {
 	cases := []*TestCase{
+		&TestCase{Args{[]int{1}}, p2d([]int{1})},
+		&TestCase{Args{[]int{1, 1}}, p2d([]int{1, 1})},
 		&TestCase{Args{[]int{1, 1, 2}}, p2d([]int{1, 1, 2}, []int{1, 2, 1}, []int{2, 1, 1})},
+		&TestCase{Args{[]int{1, 1, 2, 2}}, p2d(
+			[]int{1, 1, 2, 2},
+			[]int{1, 2, 1, 2},
+			[]int{1, 2, 2, 1},
+			[]int{2, 1, 1, 2},
+			[]int{2, 1, 2, 1},
+			[]int{2, 2, 1, 1},
+		)},
 	}
 	for _, c := range cases {
 		res := PermuteUnique(c.input[0].([]int))
